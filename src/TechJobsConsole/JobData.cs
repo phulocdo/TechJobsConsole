@@ -13,7 +13,11 @@ namespace TechJobsConsole
         public static List<Dictionary<string, string>> FindAll()
         {
             LoadData();
-            return AllJobs;
+
+            //create a copy of the orginal list
+            List<Dictionary<string, string>> copyList = new List<Dictionary<string, string>>(AllJobs);
+
+            return copyList;
         }
 
         /*
@@ -47,9 +51,9 @@ namespace TechJobsConsole
 
             foreach (Dictionary<string, string> row in AllJobs)
             {
-                string aValue = row[column];
+                string aValue = row[column].ToLower();
 
-                if (aValue.Contains(value))
+                if (aValue.Contains(value.ToLower()))
                 {
                     jobs.Add(row);
                 }
@@ -57,6 +61,40 @@ namespace TechJobsConsole
 
             return jobs;
         }
+
+        /*
+         * return a list of dictionary that contains a matching value, without duplicate
+         * 
+         */
+        public static List<Dictionary<string, string>> FindByValue(string value)
+        {
+            LoadData();
+
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+            bool duplicate = false;
+
+
+            foreach (Dictionary<string,string> row in AllJobs)
+            {
+                
+                foreach (var column in row)
+                {
+                    string aValue = column.Value.ToLower();
+                    if (aValue.Contains(value.ToLower()) & !duplicate)
+                    {
+                        jobs.Add(row);
+                        duplicate = true;
+                    }
+
+                }
+                duplicate = false;
+
+            }
+
+            return jobs;
+        }
+
+
 
         /*
          * Load and parse data from job_data.csv
