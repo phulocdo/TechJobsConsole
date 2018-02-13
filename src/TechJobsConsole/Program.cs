@@ -37,6 +37,7 @@ namespace TechJobsConsole
                     if (columnChoice.Equals("all"))
                     {
                         Console.WriteLine("\n List All Jobs\n");
+                        Console.WriteLine("{0} Result(s)",JobData.FindAll().Count);
                         PrintJobs(JobData.FindAll());
                     }
                     else
@@ -66,11 +67,13 @@ namespace TechJobsConsole
                     {
                         Console.WriteLine("Search By Value:");
                         searchResults = JobData.FindByValue(searchTerm);
+                        Console.WriteLine("{0} Result(s)", searchResults.Count);
                         PrintJobs(searchResults);
                     }
                     else
                     {
                         searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
+                        Console.WriteLine("{0} Result(s)", searchResults.Count);
                         PrintJobs(searchResults);
                     }
                 }
