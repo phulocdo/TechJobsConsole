@@ -45,6 +45,7 @@ namespace TechJobsConsole
                         List<string> results = JobData.FindAll(columnChoice);
                         results.Sort();
                         Console.WriteLine("\n*** All " + columnChoices[columnChoice] + " Values ***");
+                        Console.WriteLine("{0} Result(s)\n", results.Count);
                         foreach (string item in results)
                         {
                             Console.WriteLine(item);
@@ -67,13 +68,13 @@ namespace TechJobsConsole
                     {
                         Console.WriteLine("Search By Value:");
                         searchResults = JobData.FindByValue(searchTerm);
-                        Console.WriteLine("{0} Result(s)", searchResults.Count);
+                        Console.WriteLine("{0} Result(s)\n", searchResults.Count);
                         PrintJobs(searchResults);
                     }
                     else
                     {
                         searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
-                        Console.WriteLine("{0} Result(s)", searchResults.Count);
+                        Console.WriteLine("{0} Result(s)\n", searchResults.Count);
                         PrintJobs(searchResults);
                     }
                 }
